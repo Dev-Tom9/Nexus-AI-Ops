@@ -9,11 +9,16 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# 🛡️ SECURITY: Broaden CORS for GitHub Codespaces development
-# Allowing all origins ["*"] ensures your Port 3000 frontend can always talk to Port 8000
+# 🛡️ SECURITY: Explicitly allow your professional frontend URL
+# This fixes the "Login not going through" issue on mobile and desktop.
+origins = [
+    "https://nexus-ai-ops.onrender.com",   # Your new clean domain
+    "http://localhost:3000",              # Allows local testing in Codespaces
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=origins, 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
