@@ -18,8 +18,8 @@ export default function LoginPage() {
     setError('');
 
     try {
-      // 🚀 HARDCODED CODESPACE URL FOR CONNECTION
-      const API_URL = 'https://supreme-eureka-jjv9px754gww25x77-8000.app.github.dev';
+      // ✅ UPDATED: Now uses Environment Variables with a fallback to your Render Backend
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://nexus-ai-backend-sr8a.onrender.com';
       
       const response = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
@@ -39,7 +39,8 @@ export default function LoginPage() {
       }
     } catch (err) {
       console.error("Connection Error:", err);
-      setError('Connection Failed. Ensure Port 8000 is set to PUBLIC in the Ports tab.');
+      // ✅ UPDATED: Error message is now more helpful for production
+      setError('Connection Failed. The AI Engine is unreachable. Please check your internet or server status.');
     } finally {
       setIsLoading(false);
     }
