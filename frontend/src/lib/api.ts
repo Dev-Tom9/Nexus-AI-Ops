@@ -1,6 +1,6 @@
 import { API_URL } from './config';
 
-// ✅ Now uses the central config (Render link) instead of localhost
+// ✅ Dynamic Base URL
 const API_BASE_URL = `${API_URL}/api`;
 
 export const api = {
@@ -37,7 +37,8 @@ export const api = {
 
   // Auth: Login
   login: async (credentials: any) => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    // ✅ Ensure this matches your backend route (/api/login or /api/auth/login)
+    const response = await fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
